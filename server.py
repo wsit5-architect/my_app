@@ -1,6 +1,6 @@
 
-server.py
-/Users/wsit5/.gemini/antigravity/scratch/maggie-kiosk/backend
+#server.py
+#/Users/wsit5/.gemini/antigravity/scratch/maggie-kiosk/backend
 
 
 
@@ -9,7 +9,7 @@ import json
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
-from .telemetry.event_bus import event_bus
+from event_bus import event_bus
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -59,7 +59,7 @@ async def simulate_wake_word(data: dict):
     
     # In a real app, this would trigger the main Antigravity agent.
     # We will trigger the main agent orchestration here.
-    from .agents.main_agent import handle_user_interaction
+    from main_agent import handle_user_interaction
     asyncio.create_task(handle_user_interaction(user_input))
     
     return {"status": "ok", "message": "Wake word simulated."}

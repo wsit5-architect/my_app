@@ -1,8 +1,8 @@
 import asyncio
 import json
 from google.antigravity import LocalAgentConfig, Agent
-from ..telemetry.event_bus import event_bus
-from ..hardware.reachy_mock import reachy
+from event_bus import event_bus
+from reachy_mock import reachy
 async def authenticate_user(student_id_or_name: str) -> str:
     """Authenticates and identifies a user using the GET_PROCESS_AGENT.
     
@@ -10,7 +10,7 @@ async def authenticate_user(student_id_or_name: str) -> str:
         student_id_or_name: The numeric Student ID or a string matching First and Last Name.
     """
     event_bus.log(f"[MAIN_AGENT] Delegating authentication to GET_PROCESS_AGENT for {student_id_or_name}...")
-    from .get_process_agent import get_process_agent_config
+    from get_process_agent import get_process_agent_config
     async with Agent(get_process_agent_config) as agent:
         response = await agent.chat(f"Identify user: {student_id_or_name}")
         return await response.text()

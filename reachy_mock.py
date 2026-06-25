@@ -1,5 +1,5 @@
 import asyncio
-from ..telemetry.event_bus import event_bus
+from event_bus import event_bus
 class ReachyMiniMock:
     def __init__(self):
         self.antennas_up = False
